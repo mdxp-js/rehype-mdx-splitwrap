@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "target": "es2020",
+        "module": "es2020",
+        "moduleResolution": "node",
+        "esModuleInterop": false,
+        "lib": ["es2020"],
+        "useDefineForClassFields": true,
+        "allowJs": false,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "declaration": true,
+        "rootDir": "src",
+        "outDir": "dist",
+    },
+    "include": ["src/*"],
+}
