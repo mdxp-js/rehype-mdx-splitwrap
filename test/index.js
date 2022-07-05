@@ -12,6 +12,7 @@ const defaultOptions = {
 };
 
 const testCases = [
+	// JSX Tests
 	{
 		desc: 'Basic content splitting',
 		source: 'jsx/base.mdx',
@@ -38,6 +39,28 @@ const testCases = [
 		result: 'jsx/nested.jsx',
 	},
 
+	// Import tests
+	{
+		desc: 'Adds named import',
+		source: 'import/empty.mdx',
+		result: 'import/named.jsx',
+		fullJSX: true,
+		options: {importPath: '@dummy/import', importName: 'OriginalWrapperName'},
+	},
+	{
+		desc: 'Adds default import',
+		source: 'import/empty.mdx',
+		result: 'import/default.jsx',
+		fullJSX: true,
+		options: {importPath: '@dummy/import', defaultImport: true},
+	},
+	{
+		desc: 'Skips import and uses existing name if it already exists',
+		source: 'import/imported.mdx',
+		result: 'import/imported.jsx',
+		fullJSX: true,
+		options: {importPath: '@dummy/import', importName: 'OriginalWrapperName'},
+	},
 ];
 
 
