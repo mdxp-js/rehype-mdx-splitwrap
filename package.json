@@ -1,5 +1,5 @@
 {
-    "name": "recma-splitwrap",
+    "name": "rehype-mdx-splitwrap",
     "version": "0.1.0",
     "description": "Split MDX files on a certain component and wrap the splits",
     "license": "MIT",
@@ -7,9 +7,9 @@
     "keywords": [
         "mdx",
         "markdown",
-        "jsx",
-        "esast",
-        "recma",
+        "rehype",
+        "rehype-plugin",
+        "rehype-mdx-plugin",
         "mdxp"
     ],
     "type": "module",
@@ -27,23 +27,25 @@
     ],
     "scripts": {
         "build": "tsc",
-        "prepack": "npm run build",
-        "test-api": "tsx node_modules/uvu/bin.js test index.ts",
+        "start": "tsc --watch",
+        "test-api": "tsx node_modules/uvu/bin.js test \"^(jsx)\\.ts$\"",
         "test-cov": "c8 --check-coverage --90 --reporter lcov pnpm run test-api",
-        "test": "pnpm run build && pnpm run test-cov"
+        "test": "pnpm run build && pnpm run test-cov",
+        "prepack": "npm run build"
     },
     "devDependencies": {
         "@mdx-js/mdx": "^2.1.2",
+        "@types/hast": "^2.3.4",
         "@types/node": "^18.0.1",
+        "@types/unist": "^2.0.6",
         "c8": "^7.11.3",
+        "mdast-util-mdx": "^2.0.0",
         "tsx": "^3.7.1",
         "typescript": "^4.7.4",
         "uvu": "^0.5.6"
     },
     "dependencies": {
-        "@types/estree-jsx": "^0.0.2",
-        "estree-walker": "^3.0.1",
         "unified": "^10.1.2",
-        "unist-util-find": "^1.0.2"
+        "unist-util-walker": "^0.1.2"
     }
 }

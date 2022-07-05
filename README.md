@@ -4,13 +4,13 @@
 
 _Web Slides Made Easy_
 
-# RECMA Split Wrap
-[![main](https://github.com/mdxp-js/recma-splitwrap/actions/workflows/main.yml/badge.svg)](https://github.com/mdxp-js/recma-splitwrap/actions/workflows/main.yml)
-[![codecov](https://codecov.io/gh/mdxp-js/recma-splitwrap/branch/main/graph/badge.svg?token=Y7P3PF5SKQ)](https://codecov.io/gh/mdxp-js/recma-splitwrap)
-  
+# REHYPE MDX - Split Wrap
+[![main](https://github.com/mdxp-js/rehype-mdx-splitwrap/actions/workflows/main.yml/badge.svg)](https://github.com/mdxp-js/rehype-mdx-splitwrap/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/mdxp-js/rehype-mdx-splitwrap/branch/main/graph/badge.svg?token=Y7P3PF5SKQ)](https://codecov.io/gh/mdxp-js/rehype-mdx-splitwrap)
+
 </div>
 
-[Recma](https://mdxjs.com/packages/mdx/#architecture) plugin to split MDX content on a specific component and wrap the resulting splits in another component.  
+[Rehype](https://github.com/rehypejs/rehype) plugin to split MDX content on a specific component and wrap the resulting splits in another component.  
 Its main use is to enable automatic slide creation for [MDXP](https://github.com/mdxp-js/mdxp).
 
 Most users should not bother with this low level plugin and instead use one of the MDXP starter templates.  
@@ -21,21 +21,21 @@ This package is ESM only: Node 12+ is needed to use it and it must be imported i
 
 ### NPM
 ```bash
-npm install @mdxp-js/recma-splitwrap
+npm install @mdxp-js/rehype-mdx-splitwrap
 ```
 
 ### YARN
 ```bash
-yarn add @mdxp-js/recma-splitwrap
+yarn add @mdxp-js/rehype-mdx-splitwrap
 ```
 
 ### PNPM
 ```bash
-pnpm add @mdxp-js/recma-splitwrap
+pnpm add @mdxp-js/rehype-mdx-splitwrap
 ```
 
 ## Usage
-In order to use this plugin, you should specify it in the list of `recmaPlugins` of your mdx compilation pipeline.
+In order to use this plugin, you should specify it in the list of `rehypePlugins` of your mdx compilation pipeline.
 
 Let's say we have the following `example.mdx` file:
 ```md
@@ -54,13 +54,13 @@ The following build pipeline in `example.js` will then compile the mdx file.
 ```js
 import {readFileSync} from 'fs'
 import {compileSync} from '@mdx-js/mdx'
-import recmaSplitWrap from '../dist/index.js'
+import rehypeSplitWrap from '@mdxp/rehype-mdx-splitwrap'
 
 const result = compileSync(
   readFileSync('.sandbox/demo.mdx'),
   {
     jsx: true,
-    recmaPlugins: [[recmaSplitWrap, {splitComponent: 'hr', wrapComponent: 'Slide'}]],
+    rehypePlugins: [[rehypeSplitWrap, {splitComponent: 'hr', wrapComponent: 'Slide'}]],
   },
 );
 
@@ -105,7 +105,7 @@ export default MDXContent;
 ```
 
 ## API
-This package has a single default export which is the recma plugin.  
+This package has a single default export which is the rehype plugin.  
 The plugin takes the following options:
 
 <details>

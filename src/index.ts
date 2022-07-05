@@ -4,7 +4,7 @@ import { BaseNode, walk } from 'estree-walker'
 import { nodeIsImportDeclaration, nodeIsFunction, nodeIsJSXElement, getJSXElementName, JSXChildren, JSXParent } from './tree.js';
 
 
-export type RecmaSplitWrapOptions = {
+export type RehypeSplitWrapOptions = {
 	/** Name of the component to split the document. */
 	splitComponent: string;
 
@@ -23,9 +23,9 @@ export type RecmaSplitWrapOptions = {
 
 
 /**
- *  Recma Plugin that splits an MDX document on a certain component and wraps the resulting splits in another component.
+ *  Rehype Plugin that splits an MDX document on a certain component and wraps the resulting splits in another component.
  */
-const recmaSplitWrap: Plugin<[RecmaSplitWrapOptions], Program> = ({
+const rehypeSplitWrap: Plugin<[RehypeSplitWrapOptions], Root> = ({
 	splitComponent,
 	wrapComponent,
 	importPath,
@@ -258,4 +258,4 @@ function getNextValidChild(parent: JSXParent, index: number): [JSXChildren[numbe
 }
 
 
-export default recmaSplitWrap;
+export default remarkSplitWrap;

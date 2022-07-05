@@ -3,11 +3,11 @@ import * as assert from 'uvu/assert';
 import { compileSync } from '@mdx-js/mdx';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import recmaSplitWrap from '../src/index';
-import type { RecmaSplitWrapOptions } from '../src/index';
+import remarkSplitWrap from '../src/index';
+import type { RemarkSplitWrapOptions } from '../src/index';
 
 
-const defaultOptions: Partial<RecmaSplitWrapOptions> = {
+const defaultOptions: Partial<RemarkSplitWrapOptions> = {
 	splitComponent: 'hr',
 	wrapComponent: 'Wrapper',
 };
@@ -17,7 +17,7 @@ interface Test {
 	source: string;
 	result: string;
 	fullJSX?: boolean;
-	options?: Partial<RecmaSplitWrapOptions>;
+	options?: Partial<RemarkSplitWrapOptions>;
 }
 
 const testCases: Test[] = [
@@ -98,7 +98,7 @@ for (const uut of testCases) {
 		const targetContent = readFileSync(resolve('test', uut.result)).toString();
 		const compiledContent = compileSync(sourceContent, {
 			jsx: true,
-			recmaPlugins: [[recmaSplitWrap, {...defaultOptions, ...uut.options}]],
+			remarkPlugins: [[remarkSplitWrap, {...defaultOptions, ...uut.options}]],
 		}).toString();
 
 		if (uut.fullJSX) {
