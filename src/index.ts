@@ -1,24 +1,23 @@
 import type { Plugin } from 'unified'
-import type { Expression, JSXElement, JSXFragment, Program, ReturnStatement } from 'estree-jsx'
+import type { JSXElement, Program, ReturnStatement } from 'estree-jsx'
 import { BaseNode, walk } from 'estree-walker'
 import { nodeIsImportDeclaration, nodeIsFunction, nodeIsJSXElement, getJSXElementName, JSXChildren, JSXParent } from './tree.js';
-import { printTree } from './debug.js';
 
 
 export type RecmaSplitWrapOptions = {
-	/** Component to split the document on */
+	/** Name of the component to split the document. */
 	splitComponent: string;
 
-	/** Component to wrap the splits in */
+	/** Name of the component to wrap the splits. */
 	wrapComponent: string;
 
-	/** Path to import the wrapper from. If not specified, we assume it is not neccesary to import (HTML or Provider Component) */
+	/** Path to import the wrapComponent from. If not specified, we assume it is not neccesary to import (eg. HTML Tag or Provider Component). */
 	importPath?: string;
 
-	/** Import name of the component, if not a default import. (default: `wrapComponent` value). */
+	/** Import name of the wrapComponent, if not a default import (default: `wrapComponent` value). */
 	importName?: string;
 
-	/** Whether the wrapper is the default import (default: false). */
+	/** Whether the wrapComponent is a default import (default: false). */
 	defaultImport?: boolean;
 }
 
@@ -26,7 +25,7 @@ export type RecmaSplitWrapOptions = {
 /**
  *  Recma Plugin that splits an MDX document on a certain component and wraps the resulting splits in another component.
  */
-export const recmaSplitWrap: Plugin<[RecmaSplitWrapOptions], Program> = ({
+const recmaSplitWrap: Plugin<[RecmaSplitWrapOptions], Program> = ({
 	splitComponent,
 	wrapComponent,
 	importPath,
@@ -257,3 +256,6 @@ function getNextValidChild(parent: JSXParent, index: number): [JSXChildren[numbe
 
 	return [nextChild, index - 1];
 }
+
+
+export default recmaSplitWrap;

@@ -3,7 +3,7 @@ import * as assert from 'uvu/assert';
 import { compileSync } from '@mdx-js/mdx';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { recmaSplitWrap } from '../src/index';
+import recmaSplitWrap from '../src/index';
 import type { RecmaSplitWrapOptions } from '../src/index';
 
 
