@@ -24,11 +24,10 @@ jobs:
         os:
           - macos-latest
           - windows-latest
+          - ubuntu-latest
         node:
           - 'latest'
-        include:
-          - os: ubuntu-latest
-            node: lts/erbium
+
   full:
     name: full build
     runs-on: ubuntu-latest
