@@ -31,6 +31,7 @@ export function getJSXElementName(node: JSXElement): string {
 			return node.openingElement.name.name;
 		case 'JSXMemberExpression':
 			return node.openingElement.name.property.name;
+		/* c8 ignore next 2 */
 		case 'JSXNamespacedName':
 			return node.openingElement.name.name.name;
 	}

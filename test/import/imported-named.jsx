@@ -1,7 +1,7 @@
 /*@jsxRuntime automatic @jsxImportSource react*/
-import {Wrapper} from "@dummy/import";
+import {OriginalWrapperName as _Wrapper} from '@dummy/import';
 function _createMdxContent(props) {
-  return <><Wrapper></Wrapper></>;
+  return <><_Wrapper></_Wrapper></>;
 }
 function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = props.components || ({});

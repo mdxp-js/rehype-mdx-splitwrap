@@ -102,11 +102,13 @@ export const recmaSplitWrap: Plugin<[RecmaSplitWrapOptions], Program> = ({
 
 		// Find MDX content node
 		const createMdxContent = tree.body.find(nodeIsFunction('_createMdxContent'));
+		/* c8 ignore next 3 */
 		if (!createMdxContent) {
 			return;
 		}
 
 		const mdxContent: ReturnStatement = createMdxContent.body.body[createMdxContent.body.body.length - 1] as ReturnStatement;
+		/* c8 ignore next 3 */
 		if (!mdxContent || !mdxContent.argument) {
 			return;
 		}
