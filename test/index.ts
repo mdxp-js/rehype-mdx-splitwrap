@@ -3,15 +3,24 @@ import * as assert from 'uvu/assert';
 import { compileSync } from '@mdx-js/mdx';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { recmaSplitWrap } from '../dist/index.js';
+import { recmaSplitWrap } from '../src/index';
+import type { RecmaSplitWrapOptions } from '../src/index';
 
 
-const defaultOptions = {
+const defaultOptions: Partial<RecmaSplitWrapOptions> = {
 	splitComponent: 'hr',
 	wrapComponent: 'Wrapper',
 };
 
-const testCases = [
+interface Test {
+	desc: string;
+	source: string;
+	result: string;
+	fullJSX?: boolean;
+	options?: Partial<RecmaSplitWrapOptions>;
+}
+
+const testCases: Test[] = [
 	// JSX Tests
 	{
 		desc: 'Basic content splitting',
@@ -87,13 +96,10 @@ for (const uut of testCases) {
 	test(uut.desc, () => {
 		const sourceContent = readFileSync(resolve('test', uut.source)).toString();
 		const targetContent = readFileSync(resolve('test', uut.result)).toString();
-		const compiledContent = compileSync(
-			sourceContent,
-			{
-				jsx: true,
-				recmaPlugins: [[recmaSplitWrap, {...defaultOptions, ...uut.options}]],
-			},
-		).toString();
+		const compiledContent = compileSync(sourceContent, {
+			jsx: true,
+			recmaPlugins: [[recmaSplitWrap, {...defaultOptions, ...uut.options}]],
+		}).toString();
 
 		if (uut.fullJSX) {
 			assert.is(compiledContent, targetContent);

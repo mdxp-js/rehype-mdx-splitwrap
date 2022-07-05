@@ -17,7 +17,7 @@
     "types": "dist/index.d.ts",
     "exports": {
         ".": {
-            "types": "./types/index.d.ts",
+            "types": "./dist/index.d.ts",
             "import": "./dist/index.js"
         }
     },
@@ -27,17 +27,16 @@
     ],
     "scripts": {
         "build": "tsc",
-        "dev": "tsc --watch",
         "prepack": "npm run build",
-        "test-api": "uvu test index.js",
-        "test-cov": "c8 --check-coverage --100 --reporter lcov pnpm run test-api",
+        "test-api": "tsx node_modules/uvu/bin.js test index.ts",
+        "test-cov": "c8 --check-coverage --90 --reporter lcov pnpm run test-api",
         "test": "pnpm run build && pnpm run test-cov"
     },
     "devDependencies": {
         "@mdx-js/mdx": "^2.1.2",
-        "@types/node": "^18.0.0",
+        "@types/node": "^18.0.1",
         "c8": "^7.11.3",
-        "ts-node": "^10.8.2",
+        "tsx": "^3.7.1",
         "typescript": "^4.7.4",
         "uvu": "^0.5.6"
     },
