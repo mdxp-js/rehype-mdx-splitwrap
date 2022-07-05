@@ -23,6 +23,11 @@ const testCases = [
 		result: 'jsx/no-split.jsx',
 	},
 	{
+		desc: 'Single empty wrapper for empty document',
+		source: 'jsx/empty.mdx',
+		result: 'jsx/empty.jsx',
+	},
+	{
 		desc: 'Nested content splitting',
 		source: 'jsx/nested.mdx',
 		result: 'jsx/nested.jsx',

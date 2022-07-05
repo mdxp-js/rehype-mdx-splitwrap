@@ -112,6 +112,7 @@ export const recmaSplitWrap: Plugin<[RecmaSplitWrapOptions], Program> = ({
 		}
 
 		// Split and wrap
+		let slidesCreated = 0;
 		const previousParent: BaseNode[] = [];
 		const previousIndex: number[] = [];
 		const newChildren: JSXChildren[] = [];
@@ -137,6 +138,7 @@ export const recmaSplitWrap: Plugin<[RecmaSplitWrapOptions], Program> = ({
 					if (startIndex <= index) {
 						const children: JSXChildren = (parent as JSXParent).children.slice(startIndex, index);
 						newChildren[newChildren.length - 1].push(createSlide(children, wrapComponent));
+						slidesCreated++;
 					}
 					
 					// Set index for next slide
@@ -153,6 +155,7 @@ export const recmaSplitWrap: Plugin<[RecmaSplitWrapOptions], Program> = ({
 					// Add last slide
 					if (lastIndex < nodeAsParent.children.length - 1) {
 						children.push(createSlide(nodeAsParent.children.slice(lastIndex), wrapComponent));
+						slidesCreated++;
 					}
 
 					// Replace Node
@@ -179,6 +182,7 @@ export const recmaSplitWrap: Plugin<[RecmaSplitWrapOptions], Program> = ({
 							const children: JSXChildren = (parent as JSXParent).children.slice(startIndex, index);
 							if (!children.every(isEmptyChild)) {
 								newChildren[newChildren.length - 1].push(createSlide(children, wrapComponent));
+								slidesCreated++;
 							}
 						}
 
@@ -196,8 +200,12 @@ export const recmaSplitWrap: Plugin<[RecmaSplitWrapOptions], Program> = ({
 					}
 				}
 			},
-
 		});
+
+		// Wrap entire content if no split was found
+		if (slidesCreated == 0) {
+			(mdxContent.argument as JSXParent).children = [createSlide((mdxContent.argument as JSXParent).children, wrapComponent)];
+		}
 	}
 }
 
