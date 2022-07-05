@@ -25,7 +25,7 @@ jobs:
           - macos-latest
           - windows-latest
         node:
-          - '*'
+          - 'latest'
         include:
           - os: ubuntu-latest
             node: lts/erbium
@@ -41,7 +41,7 @@ jobs:
           version: 7
       - uses: actions/setup-node@v3
         with:
-          node-version: '*'
+          node-version: 'latest'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run test
