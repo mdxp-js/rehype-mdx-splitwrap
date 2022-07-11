@@ -20,7 +20,7 @@ type Children = Element['children'];
 /**
  * Split MDXHAST tree on a certain component and wrap the resulting splits.
  */
-export function splitWrap(tree: Root, splitComponent: string, wrapComponent: string) {
+export function splitWrap(tree: Root, splitComponent: string, wrapperComponent: string) {
 	let slidesCreated = 0;
 	const previousParent: Element[] = [];
 	const previousIndex: number[] = [];
@@ -47,7 +47,7 @@ export function splitWrap(tree: Root, splitComponent: string, wrapComponent: str
 				// Create Slide
 				if (startIndex <= index) {
 					const children = (parent as Element).children.slice(startIndex, index);
-					newChildren[newChildren.length - 1].push(createSlide(children, wrapComponent));
+					newChildren[newChildren.length - 1].push(createSlide(children, wrapperComponent));
 					slidesCreated++;
 				}
 				
@@ -64,7 +64,7 @@ export function splitWrap(tree: Root, splitComponent: string, wrapComponent: str
 
 				// Add last slide
 				if (lastIndex < nodeAsElement.children.length - 1) {
-					children.push(createSlide(nodeAsElement.children.slice(lastIndex), wrapComponent));
+					children.push(createSlide(nodeAsElement.children.slice(lastIndex), wrapperComponent));
 					slidesCreated++;
 				}
 
@@ -93,7 +93,7 @@ export function splitWrap(tree: Root, splitComponent: string, wrapComponent: str
 					if (startIndex < index) {
 						const children: Children = (parent as Element).children.slice(startIndex, index);
 						if (!children.every(isEmptyChild)) {
-							newChildren[newChildren.length - 1].push(createSlide(children, wrapComponent));
+							newChildren[newChildren.length - 1].push(createSlide(children, wrapperComponent));
 							slidesCreated++;
 						}
 					}
@@ -125,7 +125,7 @@ export function splitWrap(tree: Root, splitComponent: string, wrapComponent: str
 		);
 
 		// Process other children and merge doctype back in
-		tree.children = [...doctype, createSlide(other, wrapComponent)];
+		tree.children = [...doctype, createSlide(other, wrapperComponent)];
 	}
 }
 

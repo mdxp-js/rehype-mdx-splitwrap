@@ -18,7 +18,7 @@ export interface Test {
 
 const defaultOptions: Partial<RehypeSplitWrapOptions> = {
 	splitComponent: 'hr',
-	wrapComponent: 'Wrapper',
+	wrapperComponent: 'Wrapper',
 };
 
 

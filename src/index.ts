@@ -10,15 +10,15 @@ export type RehypeSplitWrapOptions = {
 	splitComponent: string;
 
 	/** Name of the component to wrap the splits. */
-	wrapComponent: string;
+	wrapperComponent: string;
 
-	/** Path to import the wrapComponent from. If not specified, we assume it is not neccesary to import (eg. HTML Tag or Provider Component). */
+	/** Path to import the wrapperComponent from. If not specified, we assume it is not neccesary to import (eg. HTML Tag or Provider Component). */
 	importPath?: string;
 
-	/** Import name of the wrapComponent, if not a default import (default: `wrapComponent` value). */
+	/** Import name of the wrapperComponent, if not a default import (default: `wrapperComponent` value). */
 	importName?: string;
 
-	/** Whether the wrapComponent is a default import (default: false). */
+	/** Whether the wrapperComponent is a default import (default: false). */
 	defaultImport?: boolean;
 }
 
@@ -28,7 +28,7 @@ export type RehypeSplitWrapOptions = {
  */
 const rehypeSplitWrap: Plugin<[RehypeSplitWrapOptions], Root> = ({
 	splitComponent,
-	wrapComponent,
+	wrapperComponent,
 	importPath,
 	importName,
 	defaultImport = false,
@@ -36,13 +36,13 @@ const rehypeSplitWrap: Plugin<[RehypeSplitWrapOptions], Root> = ({
 	return (tree) => {
 		if (importPath) {
 			if (importName) {
-				wrapComponent = addImport(tree, importPath, importName, defaultImport, wrapComponent);
+				wrapperComponent = addImport(tree, importPath, importName, defaultImport, wrapperComponent);
 			} else {
-				wrapComponent = addImport(tree, importPath, wrapComponent, defaultImport);
+				wrapperComponent = addImport(tree, importPath, wrapperComponent, defaultImport);
 			}
 		}
 
-		splitWrap(tree, splitComponent, wrapComponent);
+		splitWrap(tree, splitComponent, wrapperComponent);
 	}
 }
 

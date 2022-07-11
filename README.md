@@ -60,7 +60,7 @@ const result = compileSync(
   readFileSync('.sandbox/demo.mdx'),
   {
     jsx: true,
-    rehypePlugins: [[rehypeSplitWrap, {splitComponent: 'hr', wrapComponent: 'Slide'}]],
+    rehypePlugins: [[rehypeSplitWrap, {splitComponent: 'hr', wrapperComponent: 'Slide'}]],
   },
 );
 
@@ -114,21 +114,21 @@ The plugin takes the following options:
 </details>
 
 <details>
-  <summary><code>wrapComponent: string</code></summary>
+  <summary><code>wrapperComponent: string</code></summary>
   Name of the component to wrap the splits.
 </details>
 
 <details>
   <summary><code>importPath?: string = undefined</code></summary>
-  Path to import the wrapComponent from. If not specified, we assume it is not neccesary to import (eg. HTML Tag or Provider Component).
+  Path to import the wrapperComponent from. If not specified, we assume it is not neccesary to import (eg. HTML Tag or Provider Component).
 </details>
 
 <details>
-  <summary><code>importName?: string = wrapComponent</code></summary>
-  Import name of the wrapComponent, if not a default import.
+  <summary><code>importName?: string = wrapperComponent</code></summary>
+  Import name of the wrapperComponent, if not a default import.
 </details>
 
 <details>
   <summary><code>defaultImport?: boolean = false</code></summary>
-  Whether the wrapComponent is a default import.
+  Whether the wrapperComponent is a default import.
 </details>
