@@ -1,6 +1,7 @@
 import type { Plugin } from 'unified';
 import type { Root } from 'hast';
 import { splitWrap } from './splitwrap.js';
+import { addImport } from './addimport.js';
 import { printTree } from './debug.js';
 
 
@@ -33,6 +34,14 @@ const rehypeSplitWrap: Plugin<[RehypeSplitWrapOptions], Root> = ({
 	defaultImport = false,
 }) => {
 	return (tree) => {
+		if (importPath) {
+			if (importName) {
+				wrapComponent = addImport(tree, importPath, importName, defaultImport, wrapComponent);
+			} else {
+				wrapComponent = addImport(tree, importPath, wrapComponent, defaultImport);
+			}
+		}
+
 		splitWrap(tree, splitComponent, wrapComponent);
 	}
 }

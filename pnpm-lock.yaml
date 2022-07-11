@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@mdx-js/mdx': ^2.1.2
+  '@types/estree-jsx': ^0.0.2
   '@types/hast': ^2.3.4
   '@types/node': ^18.0.1
   '@types/unist': ^2.0.6
@@ -19,6 +20,7 @@ dependencies:
 
 devDependencies:
   '@mdx-js/mdx': 2.1.2
+  '@types/estree-jsx': 0.0.2
   '@types/hast': 2.3.4
   '@types/node': 18.0.3
   '@types/unist': 2.0.6
@@ -114,6 +116,12 @@ packages:
 
   /@types/estree-jsx/0.0.1:
     resolution: {integrity: sha512-gcLAYiMfQklDCPjQegGn0TBAn9it05ISEsEhlKQUddIk7o2XDokOcTN7HBO8tznM0D9dGezvHEfRZBfZf6me0A==}
+    dependencies:
+      '@types/estree': 0.0.52
+    dev: true
+
+  /@types/estree-jsx/0.0.2:
+    resolution: {integrity: sha512-1VNHdUd76ub9vmQR3R6wox6QyJWLUYByQRigBHGHav8nsWtc5PolNR5fCqvebcL3o2zBjKaFK+QXU4efTTc6jg==}
     dependencies:
       '@types/estree': 0.0.52
     dev: true
