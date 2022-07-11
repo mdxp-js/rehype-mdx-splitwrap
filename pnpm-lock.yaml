@@ -11,12 +11,12 @@ specifiers:
   tsx: ^3.7.1
   typescript: ^4.7.4
   unified: ^10.1.2
-  unist-util-walker: ^0.1.2
+  unist-util-walker: ^1.0.0
   uvu: ^0.5.6
 
 dependencies:
   unified: 10.1.2
-  unist-util-walker: 0.1.2
+  unist-util-walker: 1.0.0
 
 devDependencies:
   '@mdx-js/mdx': 2.1.2
@@ -1431,8 +1431,8 @@ packages:
       unist-util-visit-parents: 5.1.0
     dev: true
 
-  /unist-util-walker/0.1.2:
-    resolution: {integrity: sha512-qNL+5UTzsnAAZR4gL+aq+p8apF9570LHHBBwfthu7H/EQ48X5Mz97fj0EZIrvuRP4WRw1orhTfzcFpv2xCT3Lw==}
+  /unist-util-walker/1.0.0:
+    resolution: {integrity: sha512-XxadVB7qdSH6LBwhyHozj1VltpnK9m3/Zt/E/WFLaEt9eRQ0RkbsUb0lP9e1anQCEOXxf4X3NYtZQSpzqzTptw==}
     dependencies:
       '@types/unist': 2.0.6
       unified: 10.1.2

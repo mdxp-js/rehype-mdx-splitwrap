@@ -47,6 +47,6 @@
     },
     "dependencies": {
         "unified": "^10.1.2",
-        "unist-util-walker": "^0.1.2"
+        "unist-util-walker": "^1.0.0"
     }
 }
