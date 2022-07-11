@@ -12,6 +12,11 @@
         "rehype-mdx-plugin",
         "mdxp"
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mdxp-js/rehype-mdx-splitwrap"
+    },
+    "bugs": "https://github.com/mdxp-js/rehype-mdx-splitwrap/issues",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
