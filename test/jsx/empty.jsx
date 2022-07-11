@@ -1,4 +1,1 @@
-<>
-	<Wrapper>
-	</Wrapper>
-</>
+<Wrapper />
