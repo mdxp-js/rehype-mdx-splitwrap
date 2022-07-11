@@ -21,17 +21,17 @@ This package is ESM only: Node 12+ is needed to use it and it must be imported i
 
 ### NPM
 ```bash
-npm install @mdxp-js/rehype-mdx-splitwrap
+npm install @mdxp/rehype-mdx-splitwrap
 ```
 
 ### YARN
 ```bash
-yarn add @mdxp-js/rehype-mdx-splitwrap
+yarn add @mdxp/rehype-mdx-splitwrap
 ```
 
 ### PNPM
 ```bash
-pnpm add @mdxp-js/rehype-mdx-splitwrap
+pnpm add @mdxp/rehype-mdx-splitwrap
 ```
 
 ## Usage
