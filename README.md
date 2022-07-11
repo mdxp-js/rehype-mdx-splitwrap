@@ -16,6 +16,7 @@ Its main use is to enable automatic slide creation for [MDXP](https://github.com
 Most users should not bother with this low level plugin and instead use one of the MDXP starter templates.  
 However, if you want to create your own MDXP pipeline, this plugin is the core of MDXP and transforms your MDX content, by it splitting on `<hr/>` tags and wrapping the resulting splits in `<Slide/>` tags.
 
+
 ## Installation
 This package is ESM only: Node 12+ is needed to use it and it must be imported instead of required.
 
@@ -33,6 +34,7 @@ yarn add @mdxp/rehype-mdx-splitwrap
 ```bash
 pnpm add @mdxp/rehype-mdx-splitwrap
 ```
+
 
 ## Usage
 In order to use this plugin, you should specify it in the list of `rehypePlugins` of your mdx compilation pipeline.
@@ -60,40 +62,66 @@ const result = compileSync(
   readFileSync('.sandbox/demo.mdx'),
   {
     jsx: true,
-    rehypePlugins: [[rehypeSplitWrap, {splitComponent: 'hr', wrapperComponent: 'Slide'}]],
+    rehypePlugins: [[rehypeSplitWrap, {splitComponent: 'hr', wrapperComponent: 'div', wrapperProps: {className: 'wrapper'}}]],
   },
 );
 
 console.log(String(result));
 ```
 
-The result of this compilation will then yield (simplified):
+The result of this compilation will then yield:
+```jsx
+/*@jsxRuntime automatic @jsxImportSource react*/
+function MDXContent(props = {}) {
+  return (
+    <>
+      <div className="wrapper">
+        <h1>Split 1</h1>
+        <p>content</p>
+      </div>
+      
+      <div className="wrapper">
+        <h1>Split 2</h1>
+        <ul>
+          <li>a</li>
+          <li>b</li>
+          <li>c</li>
+        </ul>
+      </div>
+    </>
+  );
+}
+
+export default MDXContent;
+```
+
+<details>
+  <summary><b>Actual Complete Output</b></summary>
+
 ```jsx
 /*@jsxRuntime automatic @jsxImportSource react*/
 function _createMdxContent(props) {
   const _components = Object.assign({
+    div: "div",
     h1: "h1",
     p: "p",
-    hr: "hr",
     ul: "ul",
     li: "li"
   }, props.components);
-  return (
-    <>
-      <Slide>
-        <_components.h1>{"Split 1"}</_components.h1>
-        <_components.p>{"content"}</_components.p>
-      </Slide>
-      <Slide>
-        <_components.h1>{"Split 2"}</_components.h1>
-        <_components.ul>
-          <_components.li>{"a"}</_components.li>
-          <_components.li>{"b"}</_components.li>
-          <_components.li>{"c"}</_components.li>
-        </_components.ul>
-      </Slide>
-    </>
-  );
+  return <>
+    <_components.div className="wrapper">
+      <_components.h1>{"Split 1"}</_components.h1>{"\n"}
+      <_components.p>{"content"}</_components.p>{"\n"}
+    </_components.div>
+    <_components.div className="wrapper">{"\n"}
+      <_components.h1>{"Split 2"}</_components.h1>{"\n"}
+      <_components.ul>{"\n"}
+        <_components.li>{"a"}</_components.li>{"\n"}
+        <_components.li>{"b"}</_components.li>{"\n"}
+        <_components.li>{"c"}</_components.li>{"\n"}
+      </_components.ul>
+    </_components.div>
+  </>;
 }
 
 function MDXContent(props = {}) {
@@ -103,6 +131,9 @@ function MDXContent(props = {}) {
 
 export default MDXContent;
 ```
+
+</details>
+
 
 ## API
 This package has a single default export which is the rehype plugin.  
