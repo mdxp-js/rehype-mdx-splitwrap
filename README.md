@@ -5,6 +5,8 @@
 _Web Slides Made Easy_
 
 # REHYPE MDX - Split Wrap
+[![npm version](https://img.shields.io/npm/v/@mdxp/rehype-mdx-splitwrap?color=blue&logo=npm)](https://www.npmjs.com/package/@mdxp/rehype-mdx-splitwrap)
+[![npm downloads](https://img.shields.io/npm/dt/@mdxp/rehype-mdx-splitwrap?color=blue&logo=nodedotjs)](https://www.npmjs.com/package/@mdxp/rehype-mdx-splitwrap)
 [![main](https://github.com/mdxp-js/rehype-mdx-splitwrap/actions/workflows/main.yml/badge.svg)](https://github.com/mdxp-js/rehype-mdx-splitwrap/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/mdxp-js/rehype-mdx-splitwrap/branch/main/graph/badge.svg?token=Y7P3PF5SKQ)](https://codecov.io/gh/mdxp-js/rehype-mdx-splitwrap)
 
