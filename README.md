@@ -156,7 +156,7 @@ The plugin takes the following options:
 </details>
 
 <details>
-  <summary><code>wrapperProps: { [name: string]: any }</code></summary>
+  <summary><code>wrapperProps?: { [name: string]: any } = {}</code></summary>
   Properties that will be added to the wrapper components.
 </details>
 
