@@ -1,3 +1,6 @@
+/*
+ *  JSX SplitWrap testing
+ */
 import { runTests, Test } from './util';
 
 
@@ -6,6 +9,14 @@ const tests: Test[] = [
 		desc: 'Basic content splitting',
 		source: 'jsx/base.mdx',
 		result: 'jsx/base.jsx',
+	},
+	{
+		desc: 'Split on custom component',
+		source: 'jsx/custom-split.mdx',
+		result: 'jsx/base.jsx',
+		options: {
+			splitComponent: 'Custom',
+		},
 	},
 	{
 		desc: 'Wrap entire content when there is no split',

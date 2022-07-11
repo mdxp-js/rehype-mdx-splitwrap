@@ -28,8 +28,8 @@
     "scripts": {
         "build": "tsc",
         "start": "tsc --watch",
-        "test-api": "tsx node_modules/uvu/bin.js test \"^(jsx|import)\\.ts$\"",
-        "test-cov": "c8 --check-coverage --90 --reporter lcov pnpm run test-api",
+        "test-api": "tsx node_modules/uvu/bin.js test \\.test\\.ts$",
+        "test-cov": "c8 --check-coverage --100 --reporter lcov pnpm run test-api",
         "test": "pnpm run build && pnpm run test-cov",
         "prepack": "npm run build"
     },

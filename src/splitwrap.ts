@@ -7,7 +7,7 @@ import { walk } from 'unist-util-walker';
 // Could not find MdxJsxFlowElement type for MDXHAST
 // This is not entirely accurate but works for internal typing
 interface MdxJsxFlowElement extends Node {
-	type: 'mdxjsxflowelement',
+	type: 'mdxJsxFlowElement',
 	name: string | null,
 	attributes: Array<MdxJsxAttribute | MdxJsxExpressionAttribute>,
 	children: HastElement['children'],
@@ -131,7 +131,7 @@ export function splitWrap(tree: Root, splitComponent: string, wrapComponent: str
 
 
 function nodeIsElement(node: Node): node is Element {
-	return node.type === 'element' || node.type === 'mdxjsxflowelement';
+	return node.type === 'element' || node.type === 'mdxJsxFlowElement';
 }
 
 
@@ -139,6 +139,7 @@ function getElementName(node: Element): string {
 	if (node.type === 'element') {
 		return (node as HastElement).tagName;
 	} else {
+		/* c8 ignore next */
 		return (node as MdxJsxFlowElement).name ?? '';
 	}
 }
