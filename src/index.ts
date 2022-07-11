@@ -1,5 +1,6 @@
 import type { Plugin } from 'unified';
 import type { Root } from 'hast';
+import type { Properties } from './splitwrap.js';
 import { splitWrap } from './splitwrap.js';
 import { addImport } from './addimport.js';
 import { printTree } from './debug.js';
@@ -11,6 +12,9 @@ export type RehypeSplitWrapOptions = {
 
 	/** Name of the component to wrap the splits. */
 	wrapperComponent: string;
+
+	/** Properties that will be added to the wrapper components. */
+	wrapperProps?: Properties;
 
 	/** Path to import the wrapperComponent from. If not specified, we assume it is not neccesary to import (eg. HTML Tag or Provider Component). */
 	importPath?: string;
@@ -29,6 +33,7 @@ export type RehypeSplitWrapOptions = {
 const rehypeSplitWrap: Plugin<[RehypeSplitWrapOptions], Root> = ({
 	splitComponent,
 	wrapperComponent,
+	wrapperProps = {},
 	importPath,
 	importName,
 	defaultImport = false,
@@ -42,7 +47,7 @@ const rehypeSplitWrap: Plugin<[RehypeSplitWrapOptions], Root> = ({
 			}
 		}
 
-		splitWrap(tree, splitComponent, wrapperComponent);
+		splitWrap(tree, splitComponent, wrapperComponent, wrapperProps);
 	}
 }
 

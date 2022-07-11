@@ -119,6 +119,11 @@ The plugin takes the following options:
 </details>
 
 <details>
+  <summary><code>wrapperProps: { [name: string]: any }</code></summary>
+  Properties that will be added to the wrapper components.
+</details>
+
+<details>
   <summary><code>importPath?: string = undefined</code></summary>
   Path to import the wrapperComponent from. If not specified, we assume it is not neccesary to import (eg. HTML Tag or Provider Component).
 </details>

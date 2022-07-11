@@ -14,7 +14,13 @@ interface MdxJsEsm extends Node {
  * This function goes through the MDXHAST tree and adds an import for an item if it is not already imported.
  * It then returns the name you should use for the component in your code (which could be different than the input name, if it was already imported).
  */
-export function addImport(tree: Root, importPath: string, itemName: string, defaultImport: boolean, localName?: string) : string {
+export function addImport(
+	tree: Root,
+	importPath: string,
+	itemName: string,
+	defaultImport: boolean,
+	localName?: string
+) : string {
 	const importNodes = tree.children
 		.filter(nodeIsMdxJsEsm)
 		.flatMap(node => node.data.estree.body)

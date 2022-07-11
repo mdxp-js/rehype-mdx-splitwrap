@@ -19,6 +19,19 @@ const tests: Test[] = [
 		},
 	},
 	{
+		desc: 'Add properties to wrapper',
+		source: 'jsx/base.mdx',
+		result: 'jsx/props.jsx',
+		options: {
+			wrapperProps: {
+				className: 'wrapper-class',
+				style: {
+					backgroundColor: 'red',
+				},
+			},
+		},
+	},
+	{
 		desc: 'Wrap entire content when there is no split',
 		source: 'jsx/no-split.mdx',
 		result: 'jsx/no-split.jsx',

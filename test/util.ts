@@ -36,20 +36,35 @@ export function runTests(cases: Test[]) {
 				assert.is(compiledContent, targetContent);
 			} else {
 				// Extract return statement
-				let foundMdxContent = false;
+				let insideMdxContent = false;
+				let insideReturn = false;
+
 				const compiledReturn = compiledContent
 					.split('\n')
 					.map(s => s.trim())
 					.reduce((prev, cur) => {
-						if (prev) {
-							return prev;
+						if (insideMdxContent) {
+							if (insideReturn) {
+								if (cur.endsWith(';')) {
+									insideReturn = false;
+									insideMdxContent = false;
+								}
+
+								return prev + cur;
+							} else if (cur.startsWith('return')) {
+								if (cur.endsWith(';')) {
+									insideMdxContent = false;
+								} else {
+									insideReturn = true;
+								}
+
+								return cur;
+							}
+						} else if(cur.startsWith('function _createMdxContent')) {
+							insideMdxContent = true;
 						}
 
-						if (cur.startsWith('function _createMdxContent')) {
-							foundMdxContent = true;
-						} else if (foundMdxContent && cur.startsWith('return')) {
-							return cur;
-						}
+						return prev;
 					}, undefined)
 					;
 

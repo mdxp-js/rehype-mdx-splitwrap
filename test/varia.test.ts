@@ -45,6 +45,7 @@ test('work with doctype declaration', () => {
 			{
 				type: 'element',
 				tagName: 'Wrapper',
+				properties: {},
 				children: [
 					{
 						type: 'element',
@@ -69,7 +70,7 @@ test('work with doctype declaration', () => {
 		],
 	};
 
-	splitWrap(tree, 'hr', 'Wrapper');
+	splitWrap(tree, 'hr', 'Wrapper', {});
 	assert.equal(tree, result);
 });
 

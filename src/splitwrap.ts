@@ -15,12 +15,17 @@ interface MdxJsxFlowElement extends Node {
 
 type Element = HastElement | MdxJsxFlowElement;
 type Children = Element['children'];
-
+export type Properties = { [name: string]: any };
 
 /**
  * Split MDXHAST tree on a certain component and wrap the resulting splits.
  */
-export function splitWrap(tree: Root, splitComponent: string, wrapperComponent: string) {
+export function splitWrap(
+	tree: Root,
+	splitComponent: string,
+	wrapperComponent: string,
+	wrapperProps: Properties,
+) {
 	let slidesCreated = 0;
 	const previousParent: Element[] = [];
 	const previousIndex: number[] = [];
@@ -47,7 +52,7 @@ export function splitWrap(tree: Root, splitComponent: string, wrapperComponent: 
 				// Create Slide
 				if (startIndex <= index) {
 					const children = (parent as Element).children.slice(startIndex, index);
-					newChildren[newChildren.length - 1].push(createSlide(children, wrapperComponent));
+					newChildren[newChildren.length - 1].push(createSlide(children, wrapperComponent, wrapperProps));
 					slidesCreated++;
 				}
 				
@@ -64,7 +69,7 @@ export function splitWrap(tree: Root, splitComponent: string, wrapperComponent: 
 
 				// Add last slide
 				if (lastIndex < nodeAsElement.children.length - 1) {
-					children.push(createSlide(nodeAsElement.children.slice(lastIndex), wrapperComponent));
+					children.push(createSlide(nodeAsElement.children.slice(lastIndex), wrapperComponent, wrapperProps));
 					slidesCreated++;
 				}
 
@@ -93,7 +98,7 @@ export function splitWrap(tree: Root, splitComponent: string, wrapperComponent: 
 					if (startIndex < index) {
 						const children: Children = (parent as Element).children.slice(startIndex, index);
 						if (!children.every(isEmptyChild)) {
-							newChildren[newChildren.length - 1].push(createSlide(children, wrapperComponent));
+							newChildren[newChildren.length - 1].push(createSlide(children, wrapperComponent, wrapperProps));
 							slidesCreated++;
 						}
 					}
@@ -125,7 +130,7 @@ export function splitWrap(tree: Root, splitComponent: string, wrapperComponent: 
 		);
 
 		// Process other children and merge doctype back in
-		tree.children = [...doctype, createSlide(other, wrapperComponent)];
+		tree.children = [...doctype, createSlide(other, wrapperComponent, wrapperProps)];
 	}
 }
 
@@ -167,10 +172,11 @@ function getNextValidChild(parent: Parent, index: number): [Node | null, number]
 }
 
 
-function createSlide(nodes: Children, wrapper: string): HastElement {
+function createSlide(nodes: Children, wrapper: string, props: Properties): HastElement {
 	return {
 		type: 'element',
 		tagName: wrapper,
 		children: nodes,
+		properties: props,
 	};
 }
