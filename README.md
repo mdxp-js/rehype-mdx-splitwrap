@@ -62,7 +62,13 @@ const result = compileSync(
   readFileSync('.sandbox/demo.mdx'),
   {
     jsx: true,
-    rehypePlugins: [[rehypeSplitWrap, {splitComponent: 'hr', wrapperComponent: 'div', wrapperProps: {className: 'wrapper'}}]],
+    rehypePlugins: [
+        [rehypeSplitWrap, {
+            splitComponent: 'hr',
+            wrapperComponent: 'div',
+            wrapperProps: {className: 'wrapper'},
+        }],
+    ],
   },
 );
 
