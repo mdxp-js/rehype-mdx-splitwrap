@@ -1,6 +1,6 @@
 {
-    "name": "rehype-mdx-splitwrap",
-    "version": "0.1.0",
+    "name": "@mdxp/rehype-mdx-splitwrap",
+    "version": "0.0.0",
     "description": "Split MDX files on a certain component and wrap the splits",
     "license": "MIT",
     "author": "0phoff <0phoff@users.noreply.github.com>",
