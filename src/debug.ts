@@ -37,9 +37,11 @@ export function printTree(node: Node, stringify: NodeToString = printDefault) {
 function printDefault(node: Node): string {
 	if (node.type === 'element') {
 		return `<${(node as Element).tagName}>`;
-	} else if (node.type === 'mdxJsxFlowElement') {
+	}
+	else if (node.type === 'mdxJsxFlowElement') {
 		return `<${(node as MdxJsxFlowElement).name}>`
-	} else if (node.type === 'text') {
+	}
+	else if (node.type === 'text') {
 		const text = (node as Text).value
 			.replace(/\n/g, '\\n')
 			.replace(/\t/g, '\\t')

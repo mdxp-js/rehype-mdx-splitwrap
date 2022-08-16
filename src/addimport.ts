@@ -38,7 +38,8 @@ export function addImport(
 		if (defaultImports.length) {
 			// Already imported, use imported name instead
 			localName = defaultImports[0];
-		} else {
+		}
+		else {
 			const newImportNode: MdxJsEsm = {
 				type: 'mdxjsEsm',
 				value: `import ${itemName} from '${importPath}'`,
@@ -68,7 +69,8 @@ export function addImport(
 
 			tree.children.unshift(newImportNode);
 		}
-	} else {
+	}
+	else {
 		const namedImports = importNodes
 			.filter(node => node.type === 'ImportSpecifier' && node.imported.name === itemName)
 			.map(node => node.local.name)
@@ -77,7 +79,8 @@ export function addImport(
 		if (namedImports.length) {
 			// Already imported, use imported name instead
 			localName = namedImports[0];
-		} else {
+		}
+		else {
 			const importString = localName ? `${itemName} as ${localName}` : itemName;
 
 			const newImportNode: MdxJsEsm = {

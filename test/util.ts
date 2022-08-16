@@ -34,7 +34,8 @@ export function runTests(cases: Test[]) {
 
 			if (uut.fullJSX) {
 				assert.is(compiledContent, targetContent);
-			} else {
+			}
+			else {
 				// Extract return statement
 				let insideMdxContent = false;
 				let insideReturn = false;
@@ -51,16 +52,17 @@ export function runTests(cases: Test[]) {
 								}
 
 								return prev + cur;
-							} else if (cur.startsWith('return')) {
-								if (cur.endsWith(';')) {
+							}
+							else if (cur.startsWith('return')) {
+								if (cur.endsWith(';'))
 									insideMdxContent = false;
-								} else {
+								else
 									insideReturn = true;
-								}
 
 								return cur;
 							}
-						} else if(cur.startsWith('function _createMdxContent')) {
+						}
+						else if(cur.startsWith('function _createMdxContent')) {
 							insideMdxContent = true;
 						}
 
@@ -71,11 +73,11 @@ export function runTests(cases: Test[]) {
 				assert.ok(compiledReturn);
 
 				// 1. Extract JSX
-				// 2. remove {"\n"}
+				// 2. remove {"\n"} and {}
 				// 3. Add newlines when 2 tags follow each other
 				const compiledJSX = compiledReturn
 					.substring(7, compiledReturn.length - 1)
-					.replace(/{"\\n"}/g, '')
+					.replace(/{("\\n")?}/g, '')
 					.split('><').join('>\n<')
 					;
 
