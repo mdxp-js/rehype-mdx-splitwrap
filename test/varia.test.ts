@@ -70,8 +70,9 @@ test('work with doctype declaration', () => {
 		],
 	};
 
-	splitWrap(tree, 'hr', 'Wrapper', {});
+	splitWrap(tree, 'hr', 'Wrapper', {}, 'skip');
 	assert.equal(tree, result);
 });
+
 
 test.run();

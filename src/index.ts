@@ -4,6 +4,7 @@ import type { Properties } from './splitwrap.js';
 import { splitWrap } from './splitwrap.js';
 import { addImport } from './addimport.js';
 import { printTree } from './debug.js';
+import { MdxJsxFlowElement } from 'mdast-util-mdx';
 
 
 export type RehypeSplitWrapOptions = {
@@ -24,6 +25,9 @@ export type RehypeSplitWrapOptions = {
 
 	/** Whether the wrapperComponent is a default import (default: false). */
 	defaultImport?: boolean;
+
+	/** Comment starting string to skip processing with splitWrap (case insensitive). (default: SPLITWRAP-SKIP). */
+	skipComment: string;
 }
 
 
@@ -37,17 +41,19 @@ const rehypeSplitWrap: Plugin<[RehypeSplitWrapOptions], Root> = ({
 	importPath,
 	importName,
 	defaultImport = false,
+	skipComment = 'splitwrap-skip',
 }) => {
 	return (tree) => {
 		if (importPath) {
 			if (importName) {
 				wrapperComponent = addImport(tree, importPath, importName, defaultImport, wrapperComponent);
-			} else {
+			}
+			else {
 				wrapperComponent = addImport(tree, importPath, wrapperComponent, defaultImport);
 			}
 		}
 
-		splitWrap(tree, splitComponent, wrapperComponent, wrapperProps);
+		splitWrap(tree, splitComponent, wrapperComponent, wrapperProps, skipComment.toLowerCase());
 	}
 }
 
