@@ -264,9 +264,11 @@ function getElementName(node: Element): string {
 
 
 function isEmptyChild(node: Node): boolean {
+	const values = new Set(['', '\n']);
+
 	return (
 		node.type === 'text' &&
-		((node as Text).value === '\n' || (node as Text).value === '')
+		values.has((node as Text).value)
 	);
 }
 
