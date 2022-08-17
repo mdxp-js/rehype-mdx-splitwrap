@@ -19,6 +19,13 @@ Most users should not bother with this low level plugin and instead use one of t
 However, if you want to create your own MDXP pipeline, this plugin is the core of MDXP and transforms your MDX content, by it splitting on `<hr/>` tags and wrapping the resulting splits in `<Slide/>` tags.
 
 
+## Table of Contents
+- [Installation](#installation)
+- [API](#api)
+- [Usage](#usage)
+- [Skip Examples](#skip-examples)
+
+
 ## Installation
 This package is ESM only: Node 12+ is needed to use it and it must be imported instead of required.
 
@@ -36,6 +43,46 @@ yarn add @mdxp/rehype-mdx-splitwrap
 ```bash
 pnpm add @mdxp/rehype-mdx-splitwrap
 ```
+
+
+## API
+This package has a single default export which is the rehype plugin.  
+The plugin takes the following options:
+
+<details>
+  <summary><code>splitComponent: string</code></summary>
+  Name of the component to split the document.
+</details>
+
+<details>
+  <summary><code>wrapperComponent: string</code></summary>
+  Name of the component to wrap the splits.
+</details>
+
+<details>
+  <summary><code>wrapperProps?: { [name: string]: any } = {}</code></summary>
+  Properties that will be added to the wrapper components.
+</details>
+
+<details>
+  <summary><code>importPath?: string = undefined</code></summary>
+  Path to import the wrapperComponent from. If not specified, we assume it is not neccesary to import (eg. HTML Tag or Provider Component).
+</details>
+
+<details>
+  <summary><code>importName?: string = wrapperComponent</code></summary>
+  Import name of the wrapperComponent, if not a default import.
+</details>
+
+<details>
+  <summary><code>defaultImport?: boolean = false</code></summary>
+  Whether the wrapperComponent is a default import.
+</details>
+
+<details>
+  <summary><code>skipComment?: string = "SPLITWRAP-SKIP"</code></summary>
+  Comment starting string to skip processing with splitWrap (case insensitive).
+</details>
 
 
 ## Usage
@@ -143,36 +190,155 @@ export default MDXContent;
 </details>
 
 
-## API
-This package has a single default export which is the rehype plugin.  
-The plugin takes the following options:
+## Skip Examples
+You can tell the plugin to skip processing some parts of your code by adding skip comments.
 
-<details>
-  <summary><code>splitComponent: string</code></summary>
-  Name of the component to split the document.
-</details>
+- **start-stop**  
+  You can add "skip start" and "skip stop" comments in order to temporarily disable splitting your content on the specified `splitComponent`.
+  Note that it is strongly discouraged to stride start and stop comments with your markup, as this might yield unexpected results.
+- **inner**  
+  You can add a "skip inner" comment in order to disable splitting inside of a certain component.
+  This is similar to adding "skip start" and "skip stop" as the first and last elements of a component.
+- **outer**  
+  You can add a "skip outer" comment in order to disable splitting around a certain component.
+  Additionally, when using a "skip outer" comment for the first or last component of a split, it will be excluded from the `wrapperComponent`.
 
-<details>
-  <summary><code>wrapperComponent: string</code></summary>
-  Name of the component to wrap the splits.
-</details>
+```js
+// Plugin Configuration
+{
+  splitComponent: 'hr',
+  wrapperComponent: 'Wrapper',
+}
+```
 
-<details>
-  <summary><code>wrapperProps?: { [name: string]: any } = {}</code></summary>
-  Properties that will be added to the wrapper components.
-</details>
+<table>
+<tr>
+<th width="500px">MDX</th>
+<th width="500px">JSX</th>
+</tr>
 
-<details>
-  <summary><code>importPath?: string = undefined</code></summary>
-  Path to import the wrapperComponent from. If not specified, we assume it is not neccesary to import (eg. HTML Tag or Provider Component).
-</details>
+<tr>
+<td>
 
-<details>
-  <summary><code>importName?: string = wrapperComponent</code></summary>
-  Import name of the wrapperComponent, if not a default import.
-</details>
+```md
+# SPLIT 1
 
-<details>
-  <summary><code>defaultImport?: boolean = false</code></summary>
-  Whether the wrapperComponent is a default import.
-</details>
+{/* splitwrap-skip start */}
+
+---
+
+{/* splitwrap-skip stop */}
+
+content
+
+---
+
+# SPLIT 2
+```
+
+</td>
+<td>
+
+```html
+<>
+  <Wrapper>
+    <h1>SPLIT 1</h1>
+    <hr />
+    <p>content</p>
+  </Wrapper>
+  <Wrapper>
+    <h1>SPLIT 2</h1>
+  </Wrapper>
+</>
+```
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+```md
+# SPLIT 1
+
+<sub>
+{/* splitwrap-skip inner */}
+
+content
+
+---
+
+content
+</sub>
+
+---
+
+# SPLIT 2
+```
+
+</td>
+<td>
+
+```html
+<>
+  <Wrapper>
+    <h1>SPLIT 1</h1>
+    <sub>
+      <p>content</p>
+      <hr />
+      <p>content</p>
+    </sub>
+  </Wrapper>
+  <Wrapper>
+    <h1>SPLIT 2</h1>
+  </Wrapper>
+</>
+```
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+```md
+# SPLIT 1
+
+<sub>
+{/* splitwrap-skip outer */}
+
+content
+
+---
+
+content
+</sub>
+
+---
+
+# SPLIT 2
+```
+
+</td>
+<td>
+
+```html
+<>
+  <Wrapper>
+    <h1>SPLIT 1</h1>
+  </Wrapper>
+  <sub>
+    <p>content</p>
+    <hr />
+    <p>content</p>
+  </sub>
+  <Wrapper>
+    <h1>SPLIT 2</h1>
+  </Wrapper>
+</>
+```
+
+</td>
+</tr>
+
+</table>

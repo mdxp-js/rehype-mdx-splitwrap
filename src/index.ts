@@ -20,13 +20,13 @@ export type RehypeSplitWrapOptions = {
 	/** Path to import the wrapperComponent from. If not specified, we assume it is not neccesary to import (eg. HTML Tag or Provider Component). */
 	importPath?: string;
 
-	/** Import name of the wrapperComponent, if not a default import (default: `wrapperComponent` value). */
+	/** Import name of the wrapperComponent, if not a default import. default: `wrapperComponent` value */
 	importName?: string;
 
-	/** Whether the wrapperComponent is a default import (default: false). */
+	/** Whether the wrapperComponent is a default import. default: false */
 	defaultImport?: boolean;
 
-	/** Comment starting string to skip processing with splitWrap (case insensitive). (default: SPLITWRAP-SKIP). */
+	/** Comment starting string to skip processing with splitWrap (case insensitive). default: "SPLITWRAP-SKIP" */
 	skipComment: string;
 }
 
