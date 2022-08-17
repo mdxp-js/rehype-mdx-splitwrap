@@ -191,17 +191,7 @@ export default MDXContent;
 
 
 ## Skip Examples
-You can tell the plugin to skip processing some parts of your code by adding skip comments.
-
-- **start-stop**  
-  You can add "skip start" and "skip stop" comments in order to temporarily disable splitting your content on the specified `splitComponent`.
-  Note that it is strongly discouraged to stride start and stop comments with your markup, as this might yield unexpected results.
-- **inner**  
-  You can add a "skip inner" comment in order to disable splitting inside of a certain component.
-  This is similar to adding "skip start" and "skip stop" as the first and last elements of a component.
-- **outer**  
-  You can add a "skip outer" comment in order to disable splitting around a certain component.
-  Additionally, when using a "skip outer" comment for the first or last component of a split, it will be excluded from the `wrapperComponent`.
+You can tell the plugin to skip processing some parts of your code by adding skip comments. 
 
 ```js
 // Plugin Configuration
@@ -211,14 +201,17 @@ You can tell the plugin to skip processing some parts of your code by adding ski
 }
 ```
 
-<table>
+<table>  
+<tr><td colspan="2" align="center">
+  
+**Skip Start - Stop**  
+You can add "skip start" and "skip stop" comments in order to temporarily disable splitting your content on the specified `splitComponent`.
+Note that it is strongly discouraged to stride start and stop comments with your markup, as this might yield unexpected results.
+  
+</td></tr>
+  
 <tr>
-<th width="500px">MDX</th>
-<th width="500px">JSX</th>
-</tr>
-
-<tr>
-<td>
+<td width="600px">
 
 ```md
 # SPLIT 1
@@ -237,7 +230,7 @@ content
 ```
 
 </td>
-<td>
+<td width="600px">
 
 ```html
 <>
@@ -255,6 +248,14 @@ content
 </td>
 </tr>
 
+<tr><td colspan="2" align="center">
+  
+**Skip Inner**  
+You can add a "skip inner" comment in order to disable splitting inside of a certain component.
+This is similar to adding "skip start" and "skip stop" as the first and last elements of a component.
+
+</td></tr>
+  
 <tr>
 <td>
 
@@ -298,6 +299,14 @@ content
 </td>
 </tr>
 
+<tr><td colspan="2" align="center">
+
+**Skip Outer**  
+You can add a "skip outer" comment in order to disable splitting around a certain component.
+Additionally, when using a "skip outer" comment for the first or last component of a split, it will be excluded from the `wrapperComponent`.
+  
+</td></tr>
+  
 <tr>
 <td>
 
