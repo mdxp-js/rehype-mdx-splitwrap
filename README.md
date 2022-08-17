@@ -202,7 +202,7 @@ You can tell the plugin to skip processing some parts of your code by adding ski
 ```
 
 <table>  
-<tr><td colspan="2" align="center">
+<tr><td colspan="2" align="center" width="1500px">
   
 **Skip Start - Stop**  
 You can add "skip start" and "skip stop" comments in order to temporarily disable splitting your content on the specified `splitComponent`.
@@ -211,7 +211,7 @@ Note that it is strongly discouraged to stride start and stop comments with your
 </td></tr>
   
 <tr>
-<td width="600px">
+<td width="50%">
 
 ```md
 # SPLIT 1
@@ -230,7 +230,7 @@ content
 ```
 
 </td>
-<td width="600px">
+<td width="50%">
 
 ```html
 <>
